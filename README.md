@@ -52,6 +52,16 @@ First, create config file `databases.nmjson` like next:
 }
 ```
 
+Create test migration UP file `migrations\0001_TestSqlServerLocalDatabase_My_first_migration.sql` (change `TestSqlServerLocalDatabase` to your connection name):
+```sql
+select 1;
+```
+
+Create test migration DOWN file `migrations\0001_TestSqlServerLocalDatabase_My_first_migration_DOWN.sql` (change `TestSqlServerLocalDatabase` to your connection name):
+```sql
+select 1;
+```
+
 Next, test connections:
 ```
 PM> NanoMigrator status
