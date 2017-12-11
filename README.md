@@ -92,8 +92,8 @@ Each file name must be in the next format:
 ```
 index_name_description_postfix.ext
 ```
-Where `index` is a positive integer number (leading zeroes are possible),
-`name` is connection name (`TestSqlServerLocalDatabase`, `TestSqlServerFromAppConfig` or `TestMySqlDatabase` for config file listed above),
-`description` is a transaction description text and
-`postfix` is a optional part (may be: `UP`/`FOR` for forward migration file or `DOWN`/`REV` for revert migration file).
-If `postfix` is ommited, forward migration file is assumed.
+Where:
+  * `index` is a positive integer number (leading zeroes are possible);
+  * `name` is connection name (`TestSqlServerLocalDatabase`, `TestSqlServerFromAppConfig` or `TestMySqlDatabase` for config file listed above);
+  * `description` is a transaction description text;
+  * `postfix` is a optional part (may be: `UP`/`FOR` for forward migration file or `DOWN`/`REV` for revert migration file); when ommited then forward migration file is assumed.
