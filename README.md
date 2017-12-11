@@ -66,3 +66,16 @@ Next, test connections:
 ```
 PM> NanoMigrator status
 ```
+
+Migration files
+---------------
+
+Migration files is a `*.sql/*.cmd/*.bat/*.exe` files in folder, specified in `migrationsDirectory` parameter of config file (subfolders are also scanned).
+Each file name must be in the next format:
+```
+index_description_postfix.ext
+```
+Where `index` is a positive integer number (leading zeroes are possible),
+`description` is a transaction description text and
+`postfix` is a optional part (may be: `UP`/`FOR` for forward migration file or `DOWN`/`REV` for revert migration file).
+If `postfix` is ommited, forward migration file is assumed.
