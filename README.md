@@ -67,15 +67,33 @@ Next, test connections:
 PM> NanoMigrator status
 ```
 
+To simulate migration, run:
+```
+PM> NanoMigrator simulate
+```
+
+To migrate to the last version, run:
+```
+PM> NanoMigrator migrate
+```
+
+To revert all migrations, run:
+```
+PM> NanoMigrator migrate 0
+```
+
+Run `NanoMigrator` without arguments to get more help.
+
 Migration files
 ---------------
 
-Migration files is a `*.sql/*.cmd/*.bat/*.exe` files in folder, specified in `migrationsDirectory` parameter of config file (subfolders are also scanned).
+Migration files are `*.sql/*.cmd/*.bat/*.exe` files in folder, specified in `migrationsDirectory` parameter of config file (subfolders are also scanned).
 Each file name must be in the next format:
 ```
-index_description_postfix.ext
+index_name_description_postfix.ext
 ```
 Where `index` is a positive integer number (leading zeroes are possible),
+`name` is connection name (`TestSqlServerLocalDatabase`, `TestSqlServerFromAppConfig` or `TestMySqlDatabase` for config file listed above),
 `description` is a transaction description text and
 `postfix` is a optional part (may be: `UP`/`FOR` for forward migration file or `DOWN`/`REV` for revert migration file).
 If `postfix` is ommited, forward migration file is assumed.
