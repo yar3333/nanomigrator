@@ -11,7 +11,7 @@
     <iconUrl>https://raw.githubusercontent.com/yar3333/nanomigrator/master/favicon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>File-based database migration tool. Support raw SQL files and BAT/CMD/EXE programs. MySQL and SQL Server are supported.</description>
-    <releaseNotes>First release.</releaseNotes>
+    <releaseNotes>Minors.</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>database migration MySQL SqlServer</tags>
     <references>
