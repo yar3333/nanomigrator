@@ -14,5 +14,11 @@
     <releaseNotes>First release.</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>database migration MySQL SqlServer</tags>
+    <references>
+    </references>  
   </metadata>
+  
+  <files>
+    <file src="bin\*.dll" target="tools" />
+  </files>  
 </package>
