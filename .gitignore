@@ -1,0 +1,6 @@
+.vs/
+NanoMigrator/bin/
+NanoMigrator/obj/
+NanoMigratorLibrary/bin/
+NanoMigratorLibrary/obj/
+packages/

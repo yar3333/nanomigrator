@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoMigratorLibrary", "NanoMigratorLibrary\NanoMigratorLibrary.csproj", "{97B55D62-DEE3-4EBB-9FE7-39C53B932359}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoMigrator", "NanoMigrator\NanoMigrator.csproj", "{2961D3D1-8229-42B3-9A21-01F07C0E5B70}"
+	ProjectSection(ProjectDependencies) = postProject
+		{97B55D62-DEE3-4EBB-9FE7-39C53B932359} = {97B55D62-DEE3-4EBB-9FE7-39C53B932359}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97B55D62-DEE3-4EBB-9FE7-39C53B932359}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97B55D62-DEE3-4EBB-9FE7-39C53B932359}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2961D3D1-8229-42B3-9A21-01F07C0E5B70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2961D3D1-8229-42B3-9A21-01F07C0E5B70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF80789D-5465-48F9-B435-926B443A0EE7}
+	EndGlobalSection
+EndGlobal

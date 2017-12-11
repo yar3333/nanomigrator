@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>NanoMigrator</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>yar3333</authors>
+    <owners>yar3333</owners>
+    <licenseUrl>https://github.com/yar3333/nanomigrator/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/yar3333/nanomigrator</projectUrl>
+    <iconUrl>https://github.com/yar3333/nanomigrator/blob/master/favicon.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>File-based database migration tool. Support raw SQL files and BAT/CMD/EXE programs.</description>
+    <releaseNotes>First release.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>database migration MySQL SqlServer</tags>
+  </metadata>
+</package>
