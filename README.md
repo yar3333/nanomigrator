@@ -7,7 +7,8 @@ Features:
 
 	* simple: just a SQL/CMD/BAT/EXE files in specific folder;
 	* support several environments (custom connection groups, such as `development` and `production`);
-	* support several databases per environment.
+	* support several databases per environment;
+	* [GUI](http://nanomigrator.haqteam.com/).
 
 
 Installation
