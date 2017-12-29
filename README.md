@@ -29,7 +29,7 @@ First, create config file `databases.nmjson` like next:
   "migrationsTable": "migrations",
   "connectionGroups": {
     "development": {
-    
+      
       "TestSqlServerLocalDatabase": {
         "driver": "SqlServer",
         "connectionString": "Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename=c:\\mydir\\my_database_file.mdf;User ID=MY_LOGIN;Password=MY_PASSWORD;Initial Catalog=MY_DATABASE"
@@ -47,6 +47,7 @@ First, create config file `databases.nmjson` like next:
         "driver": "MySql",
         "connectionString": "server=localhost;user id=root;password=123456;database=MY_DATABASE;persistsecurityinfo=True;charset=utf8"
       }
+      
     }
   }
 }
@@ -54,12 +55,12 @@ First, create config file `databases.nmjson` like next:
 
 Create test migration UP file `migrations\0001_TestSqlServerLocalDatabase_My_first_migration.sql` (change `TestSqlServerLocalDatabase` to your connection name):
 ```sql
-select 1;
+SELECT 1;
 ```
 
 Create test migration DOWN file `migrations\0001_TestSqlServerLocalDatabase_My_first_migration_DOWN.sql` (change `TestSqlServerLocalDatabase` to your connection name):
 ```sql
-select 1;
+SELECT 2;
 ```
 
 Next, test connections:
@@ -97,3 +98,7 @@ Where:
   * `name` is connection name (`TestSqlServerLocalDatabase`, `TestSqlServerFromAppConfig` or `TestMySqlDatabase` for config file listed above);
   * `description` is a transaction description text;
   * `postfix` is a optional part (may be: `UP`/`FOR` for forward migration file or `DOWN`/`REV` for revert migration file); when ommited then forward migration file is assumed.
+
+NanoMigrator run `*.cmd/*.bat/.exe` migrations in the next maner:
+  * argument %1 - active connection string in `driver:connectionString` format (for example: `MySql:server=localhost;user id=root;password=123456;database=MY_DATABASE;persistsecurityinfo=True;charset=utf8`);
+  * environment variables `MIGRATION_DB_<CONNECTION_NAME>` - connection strings to all known databases in `driver:connectionString` format.

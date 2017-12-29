@@ -192,8 +192,8 @@ namespace NanoMigratorLibrary
 				case ".exe":
 				case ".cmd":
 				case ".bat":
-					log(migration.filePath + " \"" + connectionData + "\"");
-					var exitCode = runCommand(migration.filePath, "\"" + connectionData + "\"", connectionStrings.ToDictionary(x => "MIGRATION_DB_" + x.Key, x => x.Value.driver.ToString() + ":" + x.Value.connectionString));
+					log(migration.filePath + " \"" + connectionData.driver + ":" + connectionData.connectionString + "\"");
+					var exitCode = runCommand(migration.filePath, "\"" + connectionData.driver + ":" + connectionData.connectionString + "\"", connectionStrings.ToDictionary(x => "MIGRATION_DB_" + x.Key, x => x.Value.driver.ToString() + ":" + x.Value.connectionString));
 					if (exitCode != 0)
 					{
 						throw new MigratorException("None-zero exit code " + exitCode + ".");

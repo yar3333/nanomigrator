@@ -27,7 +27,7 @@ namespace NanoMigratorLibrary
 		{
 			if (filePath == null)
 			{
-				filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "default.nmjson");
+				filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "databases.nmjson");
 
 				if (!File.Exists(filePath))
 				{
