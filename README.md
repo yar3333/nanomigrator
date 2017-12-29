@@ -9,7 +9,7 @@ Features:
   * support several environments (custom connection groups, such as `development` and `production`);
   * support several databases per environment.
 
-Also, you can use [GUI](http://nanomigrator.haqteam.com/).
+Also, you can use [GUI version of NanoMigrator](http://nanomigrator.haqteam.com/).
 
 [Make a donation to help improve NanoMigrator CLI & GUI =>](https://www.paypal.me/nanomigrator/8USD?locale.x=en_US&country.x=RU)
 
