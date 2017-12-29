@@ -5,9 +5,9 @@ NanoMigrator is a C# tool to apply migrations (up and down) to database. `MySQL`
 
 Features:
 
-	* simple: just a SQL/CMD/BAT/EXE files in specific folder;
-	* support several environments (custom connection groups, such as `development` and `production`);
-	* support several databases per environment.
+  * simple: just a SQL/CMD/BAT/EXE files in specific folder;
+  * support several environments (custom connection groups, such as `development` and `production`);
+  * support several databases per environment.
 
 
 Installation
@@ -94,11 +94,13 @@ Each file name must be in the next format:
 index_name_description_postfix.ext
 ```
 Where:
+
   * `index` is a positive integer number (leading zeroes are possible);
   * `name` is connection name (`TestSqlServerLocalDatabase`, `TestSqlServerFromAppConfig` or `TestMySqlDatabase` for config file listed above);
   * `description` is a transaction description text;
   * `postfix` is a optional part (may be: `UP`/`FOR` for forward migration file or `DOWN`/`REV` for revert migration file); when ommited then forward migration file is assumed.
 
 NanoMigrator run `*.cmd/*.bat/.exe` migrations in the next maner:
+
   * argument %1 - active connection string in `driver:connectionString` format (for example: `MySql:server=localhost;user id=root;password=123456;database=MY_DATABASE;persistsecurityinfo=True;charset=utf8`);
   * environment variables `MIGRATION_DB_<CONNECTION_NAME>` - connection strings to all known databases in `driver:connectionString` format.

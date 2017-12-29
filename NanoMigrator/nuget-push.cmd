@@ -1,1 +1,1 @@
-nuget push NanoMigrator.1.0.1.nupkg %1 -Source https://api.nuget.org/v3/index.json
+nuget push NanoMigrator.%1.nupkg %2 -Source https://api.nuget.org/v3/index.json
