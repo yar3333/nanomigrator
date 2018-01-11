@@ -5,3 +5,4 @@ NanoMigratorLibrary/bin/
 NanoMigratorLibrary/obj/
 packages/
 *.nupkg
+NanoMigrator/NanoMigrator.csproj.user
