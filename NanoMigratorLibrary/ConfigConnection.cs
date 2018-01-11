@@ -17,14 +17,14 @@ namespace NanoMigratorLibrary
 		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
 		public string connectionString { get; set; }
 
-		public string toConnectionString()
+		public string toConnectionString(string baseDir)
 		{
 			if (string.IsNullOrEmpty(appConfigFile) || string.IsNullOrEmpty(connectionName)) return normalizeConnectionString(connectionString);
 
 			var doc = new XmlDocument();
 			try
 			{
-				doc.Load(appConfigFile);
+				doc.Load(Path.Combine(baseDir, appConfigFile));
 			}
 			catch (FileNotFoundException)
 			{

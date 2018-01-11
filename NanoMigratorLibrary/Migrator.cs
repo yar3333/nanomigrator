@@ -25,9 +25,9 @@ namespace NanoMigratorLibrary
 			this.log = log;
 
 			this.migrationsTable = config.migrationsTable;
-			if (group != null) this.connectionStrings = config.connectionGroups[group].ToDictionary(x => x.Key, x => new ConnectionData(x.Value.driver, x.Value.toConnectionString()));
+			if (group != null) this.connectionStrings = config.connectionGroups[group].ToDictionary(x => x.Key, x => new ConnectionData(x.Value.driver, x.Value.toConnectionString(Path.GetDirectoryName(config.filePath))));
 
-			var migrations = loadMigrations(config.migrationsDirectory);
+			var migrations = loadMigrations(Path.Combine(Path.GetDirectoryName(config.filePath) ?? "", config.migrationsDirectory));
 			ensureNoDuplicates(migrations.Where(x => x.isForward).ToArray());
 			ensureNoDuplicates(migrations.Where(x => !x.isForward).ToArray());
 			metaMigrations = migrations
