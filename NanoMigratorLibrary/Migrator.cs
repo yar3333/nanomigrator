@@ -58,7 +58,7 @@ namespace NanoMigratorLibrary
 								.Select(connectionName => new
 								{
 									connectionName,
-									curVer = getCurVersion(connectionStrings[connectionName])
+									curVer = connectionStrings.ContainsKey(connectionName) ? getCurVersion(connectionStrings[connectionName]) : 0
 								})
 								.ToDictionary(x => x.connectionName, x => x.curVer);
 
@@ -121,6 +121,9 @@ namespace NanoMigratorLibrary
 
 				Debug.Assert(pm.migration != null);
 				Debug.Assert(!pm.migration.isForward);
+
+				if (!connectionStrings.ContainsKey(pm.connectionName)) throw new MigratorException("Unknow connection '" + pm.connectionName + "'.");
+
 				applyMigration(connectionStrings[pm.connectionName], pm.migration, prevIndex);
 			}
 		}
@@ -133,6 +136,9 @@ namespace NanoMigratorLibrary
 
 				Debug.Assert(pm.migration != null);
 				Debug.Assert(pm.migration.isForward);
+
+				if (!connectionStrings.ContainsKey(pm.connectionName)) throw new MigratorException("Unknow connection '" + pm.connectionName + "'.");
+
 				applyMigration(connectionStrings[pm.connectionName], pm.migration, pm.index);
 			}
 		}
