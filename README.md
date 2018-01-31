@@ -1,11 +1,11 @@
 NanoMigrator
 ============
 
-NanoMigrator is a C# tool to apply migrations (up and down) to database. `MySQL` and `MS SQL Server` are supported.
+NanoMigrator is a C# tool to apply migrations (up and down) to database. `MySQL`, `MS SQL Server` and `MongoDB` are supported.
 
 Features:
 
-  * simple: just a SQL/CMD/BAT/EXE files in specific folder;
+  * simple: just a SQL/JSON/CMD/BAT/EXE files in specific folder;
   * support several environments (custom connection groups, such as `development` and `production`);
   * support several databases per environment.
 
@@ -45,10 +45,14 @@ First, create config file `databases.nmjson` like next:
         "connectionName":"MainConnection"
       },
       
-    
       "TestMySqlDatabase": {
         "driver": "MySql",
         "connectionString": "server=localhost;user id=root;password=123456;database=MY_DATABASE;persistsecurityinfo=True;charset=utf8"
+      },
+      
+      "TestMongoDatabase": {
+        "driver": "MongoDB",
+        "connectionString": "mongodb://localhost/MY_DATABASE"
       }
       
     }
@@ -91,7 +95,7 @@ Run `NanoMigrator` without arguments to get more help.
 Migration files
 ---------------
 
-Migration files are `*.sql/*.cmd/*.bat/*.exe` files in folder, specified in `migrationsDirectory` parameter of config file (subfolders are also scanned).
+Migration files are `*.sql/*.json/*.cmd/*.bat/*.exe` files in folder, specified in `migrationsDirectory` parameter of config file (subfolders are also scanned).
 Each file name must be in the next format:
 ```
 index_name_description_postfix.ext
@@ -102,6 +106,10 @@ Where:
   * `name` is connection name (`TestSqlServerLocalDatabase`, `TestSqlServerFromAppConfig` or `TestMySqlDatabase` for config file listed above);
   * `description` is a transaction description text;
   * `postfix` is a optional part (may be: `UP`/`FOR` for forward migration file or `DOWN`/`REV` for revert migration file); when ommited then forward migration file is assumed.
+  
+`SQL/JSON` files applyable for:
+  * `*.sql` - SQL connections only;
+  * `*.json` - MongoDB connections only.
 
 NanoMigrator run `*.cmd/*.bat/.exe` migrations in the next maner:
 
