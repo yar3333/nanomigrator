@@ -108,8 +108,8 @@ Where:
   * `postfix` is a optional part (may be: `UP`/`FOR` for forward migration file or `DOWN`/`REV` for revert migration file); when ommited then forward migration file is assumed.
   
 `SQL/JSON` files applyable for:
-  * `*.sql` - SQL connections only;
-  * `*.json` - MongoDB connections only.
+  * `*.sql` - SQL connections (file content is a SQL text; several statements is supported - use ";" as delimiter);
+  * `*.json` - MongoDB connections (file content is a text for MongoDB's `runCommand`).
 
 NanoMigrator run `*.cmd/*.bat/.exe` migrations in the next maner:
 
