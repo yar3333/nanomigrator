@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Data.Common;
 using System.Data.SqlClient;
+using MongoDB.Driver;
 using MySql.Data.MySqlClient;
 
 namespace NanoMigratorLibrary
@@ -45,17 +45,51 @@ namespace NanoMigratorLibrary
 					break;
 				}
 				
+				case DriverType.MongoDB:
+				{
+					var builder = new MongoUrl(connectionString);
+					host = builder.Server.Host;
+					port = (uint)builder.Server.Port;
+					user = builder.Username;
+					password = builder.Password;
+					database = builder.DatabaseName;
+					break;
+				}
+				
 				default:
 					throw new Exception("Unknow driver: " + driver + ".");
 			}
 		}
 
-		public DbConnection createConnection()
+		public IUniversalConnection createConnection()
 		{
 			switch (driver)
 			{
-				case DriverType.MySql:     return new MySqlConnection(connectionString);
-				case DriverType.SqlServer: return new SqlConnection(connectionString);
+				case DriverType.MySql:     return new UniversalSqlConnection(new MySqlConnection(connectionString));
+				case DriverType.SqlServer: return new UniversalSqlConnection(new SqlConnection(connectionString));
+				case DriverType.MongoDB:   return new UniversalMongoConnection(connectionString);
+			}
+			throw new Exception("Unknow driver: " + driver + ".");
+		}
+
+		public bool isSupportSQL()
+		{
+			switch (driver)
+			{
+				case DriverType.MySql:     return true;
+				case DriverType.SqlServer: return true;
+				case DriverType.MongoDB:   return false;
+			}
+			throw new Exception("Unknow driver: " + driver + ".");
+		}
+
+		public bool isSupportJSON()
+		{
+			switch (driver)
+			{
+				case DriverType.MySql:     return false;
+				case DriverType.SqlServer: return false;
+				case DriverType.MongoDB:   return true;
 			}
 			throw new Exception("Unknow driver: " + driver + ".");
 		}

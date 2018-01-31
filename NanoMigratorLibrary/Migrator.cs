@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Dapper;
 using System.Diagnostics;
-using NanoMigratorLibrary.DatabaseDrivers;
 
 namespace NanoMigratorLibrary
 {
 	public class Migrator
 	{
-		readonly static string[] MIGRATION_FILE_EXTENSIONS = { ".sql", ".exe", ".cmd", ".bat" };
+		readonly static string[] MIGRATION_FILE_EXTENSIONS = { ".sql", ".exe", ".cmd", ".bat", ".json" };
 
 		readonly string migrationsTable;
 		readonly IDictionary<string, ConnectionData> connectionStrings;
@@ -192,6 +190,12 @@ namespace NanoMigratorLibrary
 			switch (Path.GetExtension(migration.filePath))
 			{
 				case ".sql":
+					if (!connectionData.isSupportSQL()) throw new MigratorException("SQL is not supported for this connection.");
+					applyMigrationSQL(connectionData, migration.filePath);
+					break;
+
+				case ".json":
+					if (!connectionData.isSupportJSON()) throw new MigratorException("JSON is not supported for this connection.");
 					applyMigrationSQL(connectionData, migration.filePath);
 					break;
 
@@ -212,8 +216,7 @@ namespace NanoMigratorLibrary
 
 			using (var conn = connectionData.createConnection())
 			{
-				conn.Open();
-				conn.Execute("UPDATE `" + migrationsTable + "` SET `value`='" + resultVersion + "' WHERE `name`='index'");
+				conn.setVersion(migrationsTable, resultVersion);
 			}
 		}
 
@@ -221,22 +224,18 @@ namespace NanoMigratorLibrary
 		{
 			using (var conn = connectionData.createConnection())
 			{
-				try { conn.Open(); } catch (Exception e) { throw new MigratorException(e.Message); }
-
-				var command = conn.CreateCommand();
-				command.CommandTimeout = int.MaxValue;
+				conn.ensureMigrationsTableExists(migrationsTable);
 
 				var sql = File.ReadAllText(sqlFilePath).TrimEnd();
 				foreach (var connectionName in connectionStrings.Keys)
 				{
 					sql = sql.Replace("{" + connectionName + "}", connectionStrings[connectionName].database);
 				}
-				command.CommandText = sql;
 
 				log(sql);
 				try
 				{
-					var n = command.ExecuteNonQuery();
+					var n = conn.executeCommand(sql);
 					log("Rows affected: " + n);
 				}
 				catch (Exception e)
@@ -250,23 +249,7 @@ namespace NanoMigratorLibrary
 		{
 			using (var conn = connectionData.createConnection())
 			{
-				try { conn.Open(); } catch (Exception e) { throw new MigratorException(e.Message); }
-
-				var tables = conn.getTables();
-
-				if (!tables.Contains(migrationsTable))
-				{
-					conn.Execute("CREATE TABLE `" + migrationsTable + "`"
-								+ " ("
-									+"`name` varchar(100) NOT NULL"
-									+ ", `value` varchar(1000) NULL"
-									+ ", PRIMARY KEY (`name`)"
-									+ ")"
-								+ " ENGINE=InnoDB DEFAULT CHARSET=utf8");
-					conn.Execute("INSERT INTO `" + migrationsTable + "` VALUES ('index', '0')");
-				}
-
-				return conn.ExecuteScalar<int>("SELECT `value` FROM `" + migrationsTable + "` WHERE `name` = 'index'");
+				return conn.getVersion(migrationsTable);
 			}
 		}
 

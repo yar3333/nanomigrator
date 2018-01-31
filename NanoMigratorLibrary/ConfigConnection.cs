@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Xml;
 using Newtonsoft.Json;
 
@@ -65,11 +66,17 @@ namespace NanoMigratorLibrary
 		string normalizeConnectionString(string s)
 		{
 			var builder = new System.Data.Common.DbConnectionStringBuilder();
-			builder.ConnectionString = s.Trim();
-			if (builder.ContainsKey("provider connection string"))
+
+			try
 			{
-				s = (string)builder["provider connection string"];
+				builder.ConnectionString = s.Trim();
+				if (builder.ContainsKey("provider connection string"))
+				{
+					s = (string)builder["provider connection string"];
+				}
 			}
+			catch (ArgumentException) {}
+
 			return s;
 		}
 	}

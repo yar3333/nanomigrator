@@ -7,6 +7,7 @@ namespace NanoMigratorLibrary
 	public enum DriverType
 	{
 		MySql = 0,
-		SqlServer = 1
+		SqlServer = 1,
+		MongoDB = 2
 	}
 }
