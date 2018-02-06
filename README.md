@@ -38,8 +38,7 @@ First, create config file `databases.nmjson` like next:
         "connectionString": "Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename=c:\\mydir\\my_database_file.mdf;User ID=MY_LOGIN;Password=MY_PASSWORD;Initial Catalog=MY_DATABASE"
       },
       
-      "TestSqlServerFromAppConfig":
-      {
+      "TestSqlServerFromAppConfig": {
         "driver": "SqlServer",
         "appConfigFile":"mydir\\app.config",
         "connectionName":"MainConnection"
