@@ -10,10 +10,6 @@ namespace NanoMigratorLibrary
 		public readonly DriverType driver;
 		public readonly string connectionString;
 
-		public readonly string host;
-		public readonly uint port;
-		public readonly string user;
-		public readonly string password;
 		public readonly string database;
 
 		public ConnectionData(DriverType driver, string connectionString)
@@ -26,10 +22,6 @@ namespace NanoMigratorLibrary
 				case DriverType.MySql:
 				{
 					var builder = new MySqlConnectionStringBuilder(connectionString);
-					host = builder.Server;
-					port = builder.Port;
-					user = builder.UserID;
-					password = builder.Password;
 					database = builder.Database;
 					break;
 				}
@@ -37,10 +29,6 @@ namespace NanoMigratorLibrary
 				case DriverType.SqlServer:
 				{
 					var builder = new SqlConnectionStringBuilder(connectionString);
-					host = builder.DataSource.Split(',')[0];
-					port = builder.DataSource.Split(',').Length >= 2 ? uint.Parse(builder.DataSource.Split(',')[1]) : 1433;
-					user = builder.UserID;
-					password = builder.Password;
 					database = builder.InitialCatalog;
 					break;
 				}
@@ -48,10 +36,6 @@ namespace NanoMigratorLibrary
 				case DriverType.MongoDB:
 				{
 					var builder = new MongoUrl(connectionString);
-					host = builder.Server.Host;
-					port = (uint)builder.Server.Port;
-					user = builder.Username;
-					password = builder.Password;
 					database = builder.DatabaseName;
 					break;
 				}
