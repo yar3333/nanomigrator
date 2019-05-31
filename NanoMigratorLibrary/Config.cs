@@ -55,7 +55,11 @@ namespace NanoMigratorLibrary
 		void load(string filePath)
 		{
 			JsonConvert.PopulateObject(File.ReadAllText(filePath), this);
-		}
+            if (!Path.IsPathRooted(this.migrationsDirectory))
+            {
+                this.migrationsDirectory = Path.Combine(Path.GetDirectoryName(filePath), this.migrationsDirectory);
+            }
+        }
 
 		public Config clone()
 		{
