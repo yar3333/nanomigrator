@@ -8,6 +8,7 @@ namespace NanoMigratorLibrary
 	{
 		MySql = 0,
 		SqlServer = 1,
-		MongoDB = 2
+		MongoDB = 2,
+		Oracle = 3,
 	}
 }

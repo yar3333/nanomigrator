@@ -70,6 +70,9 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.19.5.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.3.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
@@ -89,19 +92,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connections\BaseSqlConnection.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="ConnectionData.cs" />
+    <Compile Include="Connections\OracleConnection.cs" />
     <Compile Include="DriverType.cs" />
     <Compile Include="MigratorException.cs" />
     <Compile Include="ConfigConnection.cs" />
     <Compile Include="MetaMigration.cs" />
     <Compile Include="Migrator.cs" />
-    <Compile Include="UniversalMongoConnection.cs" />
+    <Compile Include="Connections\SqlServerConnection.cs" />
+    <Compile Include="Connections\MongoConnection.cs" />
     <Compile Include="PreparedMigration.cs" />
     <Compile Include="Migration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IUniversalConnection.cs" />
-    <Compile Include="UniversalSqlConnection.cs" />
+    <Compile Include="Connections\IDatabaseConnection.cs" />
+    <Compile Include="Connections\MySqlConnection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

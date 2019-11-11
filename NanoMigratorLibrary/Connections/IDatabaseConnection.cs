@@ -2,7 +2,7 @@
 
 namespace NanoMigratorLibrary
 {
-	public interface IUniversalConnection : IDisposable
+	public interface IDatabaseConnection : IDisposable
 	{
 		void ensureMigrationsTableExists(string migrationsTable);
 		int getVersion(string migrationsTable);

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 using MongoDB.Driver;
 using MySql.Data.MySqlClient;
+using Oracle.ManagedDataAccess.Client;
 
 namespace NanoMigratorLibrary
 {
@@ -33,6 +35,14 @@ namespace NanoMigratorLibrary
 					break;
 				}
 				
+				case DriverType.Oracle:
+				{
+					var builder = new OracleConnectionStringBuilder(connectionString);
+                    var re = new Regex("SERVICE_NAME\\s*=\\s*([a-zA-Z0-9.]+)");
+                    database = re.Match(builder.DataSource).Groups[1].Value;
+					break;
+				}
+				
 				case DriverType.MongoDB:
 				{
 					var builder = new MongoUrl(connectionString);
@@ -45,13 +55,14 @@ namespace NanoMigratorLibrary
 			}
 		}
 
-		public IUniversalConnection createConnection()
+		public IDatabaseConnection createConnection()
 		{
 			switch (driver)
 			{
-				case DriverType.MySql:     return new UniversalSqlConnection(new MySqlConnection(connectionString));
-				case DriverType.SqlServer: return new UniversalSqlConnection(new SqlConnection(connectionString));
-				case DriverType.MongoDB:   return new UniversalMongoConnection(connectionString);
+				case DriverType.MySql:     return new MySqlConnection(connectionString);
+				case DriverType.SqlServer: return new SqlServerConnection(connectionString);
+				case DriverType.Oracle:    return new OracleConnection(connectionString);
+				case DriverType.MongoDB:   return new MongoConnection(connectionString);
 			}
 			throw new Exception("Unknow driver: " + driver + ".");
 		}
@@ -62,6 +73,7 @@ namespace NanoMigratorLibrary
 			{
 				case DriverType.MySql:     return true;
 				case DriverType.SqlServer: return true;
+				case DriverType.Oracle: return true;
 				case DriverType.MongoDB:   return false;
 			}
 			throw new Exception("Unknow driver: " + driver + ".");
@@ -73,6 +85,7 @@ namespace NanoMigratorLibrary
 			{
 				case DriverType.MySql:     return false;
 				case DriverType.SqlServer: return false;
+				case DriverType.Oracle:    return false;
 				case DriverType.MongoDB:   return true;
 			}
 			throw new Exception("Unknow driver: " + driver + ".");

@@ -4,15 +4,16 @@ using MongoDB.Driver;
 
 namespace NanoMigratorLibrary
 {
-	public class UniversalMongoConnection : IUniversalConnection
+	public class MongoConnection : IDatabaseConnection
 	{
 		protected readonly IMongoDatabase db;
 
-		public UniversalMongoConnection(string connectionString)
+		public MongoConnection(string connectionString)
 		{
-			var client = new MongoClient(connectionString);
-			db = client.GetDatabase(MongoUrl.Create(connectionString).DatabaseName);
-		}
+            var url = new MongoUrl(connectionString);
+            var client = new MongoClient(url);
+            db = client.GetDatabase(url.DatabaseName);
+        }
 
 		public void Dispose() {}
 

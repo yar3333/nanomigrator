@@ -1,30 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
 using System.Linq;
 using Dapper;
 
 namespace NanoMigratorLibrary
 {
-	public class UniversalSqlConnection : IUniversalConnection
-	{
-		protected DbConnection connection;
+	public class MySqlConnection : BaseSqlConnection
+    {
+        public MySqlConnection(string connectionString) : base(new MySql.Data.MySqlClient.MySqlConnection(connectionString)) {}
 
-		public UniversalSqlConnection(DbConnection connection)
-		{
-			this.connection = connection;
-
-			try { connection.Open(); } catch (Exception e) { throw new MigratorException(e.Message); }
-		}
-
-		public void Dispose()
-		{
-			connection?.Dispose();
-			connection = null;
-		}
-
-		public void ensureMigrationsTableExists(string migrationsTable)
+        override public void ensureMigrationsTableExists(string migrationsTable)
 		{
 			if (!getTables().Contains(migrationsTable))
 			{
@@ -39,18 +24,18 @@ namespace NanoMigratorLibrary
 			}
 		}
 
-		public int getVersion(string migrationsTable)
+        override public int getVersion(string migrationsTable)
 		{
 			if (!getTables().Contains(migrationsTable)) return 0;
 			return connection.ExecuteScalar<int>("SELECT `value` FROM `" + migrationsTable + "` WHERE `name` = 'index'");
 		}
 
-		public void setVersion(string migrationsTable, int version)
+        override public void setVersion(string migrationsTable, int version)
 		{
 			connection.Execute("UPDATE `" + migrationsTable + "` SET `value`='" + version + "' WHERE `name`='index'");
 		}
 
-		public int executeCommand(string text)
+        override public int executeCommand(string text)
 		{
 			var command = connection.CreateCommand();
 			command.CommandTimeout = int.MaxValue;

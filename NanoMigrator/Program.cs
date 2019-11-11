@@ -11,20 +11,6 @@ namespace NanoMigrator
 			var nmjsonFilePath = "databases.nmjson";
 			var group = "development";
 
-			if (args.Length == 0)
-			{
-				Console.WriteLine("Using:");
-				Console.WriteLine("    nanomigrator [ -f <config> ] [ -g <group>] migrate [ <version> ]");
-				Console.WriteLine("    nanomigrator [ -f <config> ] [ -g <group>] status");
-				Console.WriteLine("    nanomigrator [ -f <config> ] [ -g <group>] simulate [ <version> ]");
-				Console.WriteLine("");
-				Console.WriteLine("Options:");
-				Console.WriteLine("    <config> - path to configuration file (default is '" + nmjsonFilePath + "');");
-				Console.WriteLine("    <group> - connection group name in configuration file (default is '" + group + "');");
-				Console.WriteLine("    <version> - integer version number to switch to (0 for revert all, default is most recent version).");
-				return;
-			}
-
 			for (var i = 0; i < args.Length - 1; i++)
 			{
 				if (args[i] == "-f")
@@ -42,7 +28,21 @@ namespace NanoMigrator
 				}
 			}
 
-			try
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Using:");
+                Console.WriteLine("    nanomigrator [ -f <config> ] [ -g <group>] migrate [ <version> ]");
+                Console.WriteLine("    nanomigrator [ -f <config> ] [ -g <group>] status");
+                Console.WriteLine("    nanomigrator [ -f <config> ] [ -g <group>] simulate [ <version> ]");
+                Console.WriteLine("");
+                Console.WriteLine("Options:");
+                Console.WriteLine("    <config> - path to configuration file (default is '" + nmjsonFilePath + "');");
+                Console.WriteLine("    <group> - connection group name in configuration file (default is '" + group + "');");
+                Console.WriteLine("    <version> - integer version number to switch to (0 for revert all, default is most recent version).");
+                return;
+            }
+			
+            try
 			{
 				switch (args[0])
 				{
