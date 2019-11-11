@@ -1,7 +1,7 @@
 NanoMigrator
 ============
 
-NanoMigrator is a C# tool to apply migrations (up and down) to database. `MySQL`, `MS SQL Server` and `MongoDB` are supported.
+NanoMigrator is a C# tool to apply migrations (up and down) to database. `MySQL`, `MS SQL Server`, `MongoDB` and `Oracle` are supported.
 
 Features:
 

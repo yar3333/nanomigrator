@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/yar3333/nanomigrator</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/yar3333/nanomigrator/master/favicon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>File-based database migration tool. Support raw SQL/JSON query files and BAT/CMD/EXE programs. MySQL, MS SQL Server and MongoDB are supported.</description>
+    <description>File-based database migration tool. Support raw SQL/JSON query files and BAT/CMD/EXE programs. MySQL, MS SQL Server, MongoDB and Oracle are supported.</description>
     <releaseNotes>MongoDB support.</releaseNotes>
     <copyright>Copyright 2018</copyright>
     <tags>database migration MySQL SqlServer MongoDB mongo</tags>
